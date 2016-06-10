@@ -1,0 +1,5 @@
+maxconf*
+.ensime_cache/
+target/
+#*
+.#*
