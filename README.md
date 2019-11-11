@@ -7,7 +7,7 @@ Source code for my [semester project](https://github.com/rubenfiszel/scala-drl/r
 General Markov Decision Process (MDP) deep reinforcement library on top of deeplearning4j.
 
 
-##Quickstart
+## Quickstart
 
 ### Implement one of the MDP typeclass
 
@@ -42,51 +42,53 @@ implicit object Game6561V extends Randomizable[Game6561] {
 	def potentialStates(g: Game6561, a: A): IndexedSeq[(Game6561, Reward, Odd)] = {
 		val (ng, rw) = realizeTransition(g, cAction(a))
 		IndexedSeq((ng, rw, 1f))
-    }
+	}
 
-    def availableActions(g: Game6561) =
-      g.availableMoveNext
+	def availableActions(g: Game6561) =
+	g.availableMoveNext
 
-    def value(g: Game6561) =
-      g.value
+	def value(g: Game6561) =
+	g.value
 
-    def heuristic(g: Game6561) =
-      g.eval.toFloat
+	def heuristic(g: Game6561) =
+	g.eval.toFloat
 
-    def toInput(g: Game6561) =
-      g.toInput
+	def toInput(g: Game6561) =
+	g.toInput
 
-    def toString(g: Game6561) =
-      g.toString
+	def toString(g: Game6561) =
+	g.toString
 
 	def genRandom() =
 		Game6561(Grid6561.random(Game6561Conf.gameL, 3), Rand.nextInt(Game6561Conf.gameL), 0)
 }
 ```
+
 Valuable only requires:
 
 ```scala
-	def value(state: S): Value
+def value(state: S): Value
 
-    def heuristic(state: S): Float
+def heuristic(state: S): Float
 
-    def potentialStates(state: S, action: A): IndexedSeq[(S, Reward, Odd)]
+def potentialStates(state: S, action: A): IndexedSeq[(S, Reward, Odd)]
 ```
+
 then to apply Q-learning:
 
 ```scala
-	import drl.Rand
-	import drl.backend._
-	import drl.mdp.Game2048._
+import drl.Rand
+import drl.backend._
+import drl.mdp.Game2048._
 
-    Rand.setSeed(seed)
+Rand.setSeed(seed)
 
-	val nconf:NConf = ...
-	val deconf: DeepExplorationConf = ...
-	val offrlconf: OfflineRLConf = ...
-	val qconf: QConf = ...
+val nconf:NConf = ...
+val deconf: DeepExplorationConf = ...
+val offrlconf: OfflineRLConf = ...
+val qconf: QConf = ...
 
-	SelfPlay.trainModelRLDeepQ[Game2048, SeparableCompGraph](qconf, scala.Left(nconf), deconf, offrlconf)
+SelfPlay.trainModelRLDeepQ[Game2048, SeparableCompGraph](qconf, scala.Left(nconf), deconf, offrlconf)
 ```
 
 ## MDP included
