@@ -45,19 +45,19 @@ implicit object Game6561V extends Randomizable[Game6561] {
 	}
 
 	def availableActions(g: Game6561) =
-	g.availableMoveNext
+		g.availableMoveNext
 
 	def value(g: Game6561) =
-	g.value
+		g.value
 
 	def heuristic(g: Game6561) =
-	g.eval.toFloat
+		g.eval.toFloat
 
 	def toInput(g: Game6561) =
-	g.toInput
+		g.toInput
 
 	def toString(g: Game6561) =
-	g.toString
+		g.toString
 
 	def genRandom() =
 		Game6561(Grid6561.random(Game6561Conf.gameL, 3), Rand.nextInt(Game6561Conf.gameL), 0)
